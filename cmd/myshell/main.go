@@ -59,6 +59,14 @@ func typeBuiltIn(args []string) {
 	fmt.Printf("%s: not found\n", cmd)
 }
 
+func cd(args []string) {
+	path := strings.Join(args, "")
+
+	if err := os.Chdir(path); err != nil {
+		fmt.Println(err)
+	}
+}
+
 func readLine() string {
 	reader := bufio.NewReader(os.Stdin)
 
@@ -102,6 +110,7 @@ func main() {
 		"exit": exit,
 		"echo": echo,
 		"type": typeBuiltIn,
+		"cd":   cd,
 	}
 
 	for {
