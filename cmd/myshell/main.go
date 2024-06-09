@@ -14,7 +14,6 @@ func exit(args []string) {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	fmt.Printf("Exit with code %d\n", code)
 	os.Exit(code)
 }
 
