@@ -9,6 +9,8 @@ import (
 	"strings"
 )
 
+var builtIns map[string]func(args []string)
+
 func exit(args []string) {
 	code := 0
 	if len(args) > 0 {
@@ -23,6 +25,19 @@ func exit(args []string) {
 
 func echo(args []string) {
 	fmt.Println(strings.Join(args, " "))
+}
+
+func typeBuiltIn(args []string) {
+	cmd := args[0]
+
+	for k := range builtIns {
+		if k == cmd {
+			fmt.Printf("%s is a shell builtin\n", cmd)
+			return
+		}
+	}
+
+	fmt.Printf("%s not found\n", cmd)
 }
 
 func readLine() string {
@@ -43,17 +58,22 @@ func splitLine(line string) (string, []string) {
 }
 
 func run(command string, args []string) {
-	switch command {
-	case "exit":
-		exit(args)
-	case "echo":
-		echo(args)
-	default:
+	fn, f := builtIns[command]
+
+	if f {
+		fn(args)
+	} else {
 		fmt.Printf("%s: command not found\n", command)
 	}
 }
 
 func main() {
+	builtIns = map[string]func(args []string){
+		"exit": exit,
+		"echo": echo,
+		"type": typeBuiltIn,
+	}
+
 	for {
 		fmt.Fprint(os.Stdout, "$ ")
 		line := readLine()
