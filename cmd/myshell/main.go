@@ -63,7 +63,7 @@ func cd(args []string) {
 	path := strings.Join(args, "")
 
 	if err := os.Chdir(path); err != nil {
-		fmt.Println(err)
+		fmt.Printf("cd: %s: No such file or directory\n", path)
 	}
 }
 
