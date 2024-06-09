@@ -20,11 +20,10 @@ func readLine() string {
 }
 
 func main() {
-	// Uncomment this block to pass the first stage
-	fmt.Fprint(os.Stdout, "$ ")
+	for {
+		fmt.Fprint(os.Stdout, "$ ")
+		cmd := readLine()
 
-	// Wait for user input
-	cmd := readLine()
-
-	fmt.Printf("%s: command not found\n", cmd)
+		fmt.Printf("%s: command not found\n", cmd)
+	}
 }
