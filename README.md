@@ -2,4 +2,4 @@
 
 # Go Shell
 
-A Golang shell implementation built to complete the [Build your own Shell](https://app.codecrafters.io/courses/shell/overview)
+A Golang shell implementation built to complete the [Build your own Shell](https://app.codecrafters.io/courses/shell/overview) challenge
