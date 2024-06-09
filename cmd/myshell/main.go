@@ -43,7 +43,7 @@ func typeBuiltIn(args []string) {
 	for _, path := range paths {
 		entries, err := os.ReadDir(path)
 		if err != nil {
-			log.Fatalln(err)
+			continue
 		}
 
 		for _, e := range entries {
