@@ -37,7 +37,24 @@ func typeBuiltIn(args []string) {
 		}
 	}
 
-	fmt.Printf("%s not found\n", cmd)
+	pathEnv := os.Getenv("PATH")
+	paths := strings.Split(pathEnv, ":")
+
+	for _, path := range paths {
+		entries, err := os.ReadDir(path)
+		if err != nil {
+			log.Fatalln(err)
+		}
+
+		for _, e := range entries {
+			if !e.IsDir() && e.Name() == cmd {
+				fmt.Printf("%s is %s\n", cmd, fmt.Sprintf("%s/%s", path, cmd))
+				return
+			}
+		}
+	}
+
+	fmt.Printf("%s: command not found\n", cmd)
 }
 
 func readLine() string {
