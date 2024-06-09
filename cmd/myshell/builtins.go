@@ -54,7 +54,18 @@ func typeBuiltIn(args []string) {
 }
 
 func cd(args []string) {
+	const homeDirAlias = "~"
 	path := strings.Join(args, "")
+
+	if path == homeDirAlias {
+		homeDir, err := os.UserHomeDir()
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		path = homeDir
+	}
 
 	if err := os.Chdir(path); err != nil {
 		fmt.Printf("cd: %s: No such file or directory\n", path)
