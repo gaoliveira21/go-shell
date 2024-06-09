@@ -10,11 +10,19 @@ import (
 )
 
 func exit(args []string) {
-	code, err := strconv.Atoi(args[0])
-	if err != nil {
-		log.Fatalln(err)
+	code := 0
+	if len(args) > 0 {
+		c, err := strconv.Atoi(args[0])
+		if err == nil {
+			code = c
+		}
 	}
+
 	os.Exit(code)
+}
+
+func echo(args []string) {
+	fmt.Println(strings.Join(args, " "))
 }
 
 func readLine() string {
@@ -38,6 +46,8 @@ func run(command string, args []string) {
 	switch command {
 	case "exit":
 		exit(args)
+	case "echo":
+		echo(args)
 	default:
 		fmt.Printf("%s: command not found\n", command)
 	}
