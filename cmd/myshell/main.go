@@ -54,7 +54,7 @@ func typeBuiltIn(args []string) {
 		}
 	}
 
-	fmt.Printf("%s: command not found\n", cmd)
+	fmt.Printf("%s: not found\n", cmd)
 }
 
 func readLine() string {
